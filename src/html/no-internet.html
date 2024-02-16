@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Passvault - No internet connection</title>
+  </head>
+  <body>
+    <div class="no-internet-container">
+      <svg id="t-rex" xmlns="http://www.w3.org/2000/svg"
+         width="300" height="300" viewBox="0 0 512 512"
+         preserveAspectRatio="xMidYMid meet"
+         class="t-rex-svg" stroke="none"
+      >
+        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">
+          <path d="M2620 4040 l0 -70 -70 0 -70 0 0 -465 0 -465 -70 0 -70 0 0 -70 0
+-70 -105 0 -105 0 0 -70 0 -70 -110 0 -110 0 0 -70 0 -70 -70 0 -70 0 0 -75 0
+-75 -140 0 -140 0 0 75 0 75 -75 0 -75 0 0 70 0 70 -70 0 -70 0 0 140 0 140
+-70 0 -70 0 0 -425 0 -425 70 0 70 0 0 -70 0 -70 70 0 70 0 0 -75 0 -75 75 0
+75 0 0 -70 0 -70 105 0 105 0 0 -35 c0 -28 4 -35 20 -35 11 0 20 -7 20 -15 0
+-8 7 -15 15 -15 13 0 15 -41 15 -305 l0 -305 145 0 145 0 0 70 0 70 -75 0 -75
+0 0 75 0 75 75 0 75 0 0 70 0 70 70 0 70 0 0 70 0 70 70 0 70 0 0 -70 0 -70
+70 0 70 0 0 -215 0 -215 145 0 145 0 0 70 0 70 -75 0 -75 0 0 285 0 285 75 0
+75 0 0 70 0 70 70 0 70 0 0 110 0 110 70 0 70 0 0 250 0 250 70 0 70 0 0 -75
+0 -75 75 0 75 0 0 145 0 145 -145 0 -145 0 0 140 0 140 285 0 285 0 0 70 0 70
+-215 0 -215 0 0 75 0 75 355 0 355 0 0 320 0 320 -70 0 -70 0 0 70 0 70 -570
+0 -570 0 0 -70z m290 -215 l0 -75 -70 0 -70 0 0 75 0 75 70 0 70 0 0 -75z"/>
+          <path d="M350 1585 l0 -35 570 0 570 0 0 35 0 35 -570 0 -570 0 0 -35z"/>
+          <path d="M2910 1585 l0 -35 1000 0 1000 0 0 35 0 35 -1000 0 -1000 0 0 -35z"/>
+          <path d="M4260 1375 l0 -35 105 0 105 0 0 35 0 35 -105 0 -105 0 0 -35z"/>
+          <path d="M780 1300 l0 -40 140 0 140 0 0 40 0 40 -140 0 -140 0 0 -40z"/>
+          <path d="M3260 1155 c0 -34 1 -35 40 -35 39 0 40 1 40 35 0 34 -1 35 -40 35
+-39 0 -40 -1 -40 -35z"/>
+          <path d="M350 1085 l0 -35 140 0 140 0 0 35 0 35 -140 0 -140 0 0 -35z"/>
+          <path d="M1340 1085 l0 -35 75 0 75 0 0 35 0 35 -75 0 -75 0 0 -35z"/>
+          <path d="M3760 1085 l0 -35 145 0 145 0 0 35 0 35 -145 0 -145 0 0 -35z"/>
+        </g>
+      </svg>
+      <p id="no-internet-text-0">You have no Internet connection.</p>
+      <p id="no-internet-text-1">Please try later or wait until we get back.</p>
+    </div>
+  </body>
+  <script type="application/ecmascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const dictionary = {
+        'es': {
+          'text0': 'No tienes conexión a Internet.',
+          'text1': 'Porfavor, inténtalo más tarde o\n espera hasta que volvamos a conectarnos.',
+        },
+        'en-US': {
+          'text0': 'You have no Internet connection.',
+          'text1': 'Please, try later or wait until we get connected back.',
+        },
+      };
+
+      const noInternetText0 = document.getElementById('no-internet-text-0');
+      const noInternetText1 = document.getElementById('no-internet-text-1');
+
+      const language = navigator.language;
+      const noInternetText = dictionary[language] ?? null;
+
+      if (noInternetText0 && noInternetText1 && noInternetText) {
+        const { text0, text1 } = noInternetText;
+        noInternetText0.innerText = text0;
+        noInternetText1.innerText = text1;
+      }
+    });
+  </script>
+</html>

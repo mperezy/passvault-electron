@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  passvault-electron:
+    build: .
+    image: passvault-client
+    container_name: passvault-client
+    hostname: passvault-client
+    working_dir: /app
+    volumes:
+      - ./:/app
+#    stdin_open: true
+#    tty: true

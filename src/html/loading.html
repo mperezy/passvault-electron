@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Passvault - Loading</title>
+  </head>
+  <body>
+    <div class="loading-animation">
+      <div id="spinner" class="spinner spinner-light"></div>
+      <h1 id="loading-header" class="loading-header">Loading</h1>
+    </div>
+  </body>
+  <script type="application/ecmascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const dictionary = {
+        'es': 'Cargando',
+        'en-US': 'Loading',
+      };
+
+      const loadingHeader = document.getElementById('loading-header');
+
+      const language = navigator.language;
+      const loadingHeaderText = dictionary[language] ?? null;
+
+      if (loadingHeader && loadingHeaderText) {
+        document.getElementById('loading-header').innerText = loadingHeaderText;
+      }
+    });
+  </script>
+</html>
