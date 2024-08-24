@@ -14,6 +14,11 @@ export type Urls = {
 };
 
 export type MenuItem = {
+  app: {
+    submenu: {
+      title: string;
+    }[];
+  };
   file: {
     title: string;
     submenu: {

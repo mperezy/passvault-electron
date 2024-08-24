@@ -62,9 +62,9 @@ const createWindow = (): void => {
     .catch((error) => console.log({ errorOnLoadURL: error }));
 
   if (process.platform === 'darwin') {
-    Menu.setApplicationMenu(mainMenu(mainWindow, app.getLocale(), appObject));
+    Menu.setApplicationMenu(mainMenu(mainWindow, appObject));
   } else {
-    mainWindow.setMenu(mainMenu(mainWindow, app.getLocale(), appObject));
+    mainWindow.setMenu(mainMenu(mainWindow, appObject));
   }
 
   if (appObject.isDarkModeEnabled) {

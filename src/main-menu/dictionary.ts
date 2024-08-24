@@ -2,6 +2,16 @@ import type { MenuItem } from 'types';
 
 export default {
   es: {
+    app: {
+      submenu: [
+        {
+          title: 'Refrescar',
+        },
+        {
+          title: 'Salir',
+        },
+      ],
+    },
     file: {
       title: 'Archivo',
       submenu: {
@@ -14,6 +24,16 @@ export default {
     },
   },
   'en-US': {
+    app: {
+      submenu: [
+        {
+          title: 'Reload',
+        },
+        {
+          title: 'Exit',
+        },
+      ],
+    },
     file: {
       title: 'File',
       submenu: {
