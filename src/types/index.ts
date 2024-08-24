@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import type { BrowserWindow } from 'electron';
 
 export type AppObject = {
   isAppLoaded: boolean;
@@ -6,12 +6,12 @@ export type AppObject = {
   isDarkModeEnabled: boolean;
   isProduction: boolean;
   popupWindows?: BrowserWindow[];
-}
+};
 
 export type Urls = {
   mainUrl: string;
   noInternetUrl: string;
-}
+};
 
 export type MenuItem = {
   file: {
@@ -21,14 +21,14 @@ export type MenuItem = {
       options: {
         dark: string;
         light: string;
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};
 
 export type Configuration = {
   theme: {
     darkMode: boolean;
     lightMode: boolean;
-  }
-}
+  };
+};

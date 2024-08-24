@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { Configuration } from '../types';
+import type { Configuration } from 'types';
 
 const configFilePath = path.join(app.getPath('userData'), 'config.json');
 
@@ -25,7 +25,7 @@ export const readConfig = (): Configuration => {
       theme: {
         darkMode: false,
         lightMode: true,
-      }
+      },
     };
   }
 };

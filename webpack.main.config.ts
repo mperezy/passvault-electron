@@ -1,6 +1,7 @@
 import type { Configuration } from 'webpack';
 
 import { rules } from './webpack.rules';
+import { resolver } from './webpack.resolve.modules';
 
 export const mainConfig: Configuration = {
   /**
@@ -13,6 +14,6 @@ export const mainConfig: Configuration = {
     rules,
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    ...resolver.resolve,
   },
 };

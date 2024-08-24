@@ -1,15 +1,15 @@
 import { BrowserWindow } from 'electron';
-import Status from './';
-import { AppObject } from '../types';
+import Status from 'ipc-events';
+import type { AppObject } from 'types';
 
 export default ({
   window,
   appObject,
-  preloadEntry
+  preloadEntry,
 }: {
-  window: BrowserWindow,
-  appObject: AppObject,
-  preloadEntry: string
+  window: BrowserWindow;
+  appObject: AppObject;
+  preloadEntry: string;
 }) => {
   window.webContents.on('did-create-window', (createdWindow, createdWindowDetails) => {
     createdWindow.destroy();
@@ -23,16 +23,13 @@ export default ({
       webPreferences: {
         nodeIntegration: true,
         preload: preloadEntry,
-      }
+      },
     });
 
     popupWindow.setMenu(null);
-    popupWindow.webContents.send(
-      Status.TOGGLE_DARK_MODE,
-      {
-        isEnabled: appObject.isDarkModeEnabled
-      }
-    );
+    popupWindow.webContents.send(Status.TOGGLE_DARK_MODE, {
+      isEnabled: appObject.isDarkModeEnabled,
+    });
 
     popupWindow.loadURL(url).then(() => {
       popupWindow.show();
