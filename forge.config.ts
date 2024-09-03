@@ -17,7 +17,7 @@ const APP_NAME_ = APP_NAME.toLowerCase().replaceAll(' ', '-');
 const config: ForgeConfig = {
   packagerConfig: {
     icon: './src/images/icon.png',
-    executableName: 'Passvault',
+    executableName: 'passvault',
   },
   rebuildConfig: {},
   makers: [

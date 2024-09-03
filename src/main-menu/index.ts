@@ -14,7 +14,7 @@ export default (window: BrowserWindow, appObject: AppObject) => {
   const wording = dictionary[locale];
   const template: Electron.MenuItemConstructorOptions[] = [
     {
-      label: 'App',
+      label: 'Passvault',
       submenu: [
         {
           label: wording.app.submenu[0].title,

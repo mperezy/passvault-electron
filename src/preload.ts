@@ -3,8 +3,8 @@
 
 import { ipcRenderer } from 'electron';
 import env from '../env.json';
-import Status from './ipc-events';
-import { enableDarkMode, disableDarkMode, setFetchMethod } from './utils/darkreader';
+import Status from 'ipc-events';
+import { enableDarkMode, disableDarkMode, setFetchMethod } from 'utils/darkreader';
 
 console.log('👋 This message is being logged by "preload.ts", included via webpack');
 
