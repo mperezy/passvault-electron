@@ -23,7 +23,7 @@ const config: ForgeConfig = {
   makers: [
     new MakerSquirrel({
       name: APP_NAME_,
-      setupIcon: './src/images/icon.ico'
+      setupIcon: './src/images/icon.ico',
     }),
     // new MakerZIP({}, ['darwin', 'linux']),
     new MakerDeb({
@@ -31,14 +31,13 @@ const config: ForgeConfig = {
         name: APP_NAME_,
         productName: APP_NAME,
         icon: './src/images/icon.png',
-
       },
     }),
     new MakerDMG({
       name: APP_NAME_,
       format: 'ULFO',
       icon: './src/images/icon.icns',
-    })
+    }),
   ],
   plugins: [
     new WebpackPlugin({
@@ -73,9 +72,9 @@ const config: ForgeConfig = {
           {
             name: 'popup_window',
             preload: {
-              js: './src/popupPreload.ts'
-            }
-          }
+              js: './src/popupPreload.ts',
+            },
+          },
         ],
       },
     }),
