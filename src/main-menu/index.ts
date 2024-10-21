@@ -9,7 +9,7 @@ const changeTheme = (window: BrowserWindow, isEnabled: boolean) => {
   window.webContents.send(Status.TOGGLE_DARK_MODE, { isEnabled });
 };
 
-export default (window: BrowserWindow, appObject: AppObject) => {
+export default (window: BrowserWindow, appObject: AppObject, mainUrl: string) => {
   const locale = app.getLocale();
   const wording = dictionary[locale];
   const template: Electron.MenuItemConstructorOptions[] = [
@@ -19,7 +19,13 @@ export default (window: BrowserWindow, appObject: AppObject) => {
         {
           label: wording.app.submenu[0].title,
           accelerator: 'CmdOrCtrl+R',
-          click: () => window.webContents.reload(),
+          click: () =>
+            window
+              .loadURL(mainUrl)
+              .then(() => console.log('**** Passvault URL was loaded as expected.'))
+              .catch((error) =>
+                console.error('**** Passvault URL was NOT loaded as expected.', { error }),
+              ),
         },
         {
           label: wording.app.submenu[1].title,

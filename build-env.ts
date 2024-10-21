@@ -9,7 +9,7 @@ const environment: { [key: string]: 'development' | 'production' } = {
 dotenvConfig();
 
 const envFile = dotenvConfig().parsed;
-const envJsonPath = './env.json';
+const envJsonPath = './src/env.json';
 const isProduction = process.argv.slice(2)[0] === environment.production;
 const { development, production } = environment;
 

@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu, globalShortcut } from 'electron';
 import * as process from 'process';
-import env from '../env.json';
+import env from 'env.json';
 import type { AppObject } from 'types';
 import { readConfig } from 'utils/saveConfiguration';
 import Status from 'ipc-events';
@@ -38,6 +38,7 @@ const appObject: AppObject = {
 };
 
 // Handle creating/removing shortcuts on Windows  when installing/uninstalling.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
@@ -62,9 +63,9 @@ const createWindow = (): void => {
     .catch((error) => console.log({ errorOnLoadURL: error }));
 
   if (process.platform === 'darwin') {
-    Menu.setApplicationMenu(mainMenu(mainWindow, appObject));
+    Menu.setApplicationMenu(mainMenu(mainWindow, appObject, PASSVAULT_URL));
   } else {
-    mainWindow.setMenu(mainMenu(mainWindow, appObject));
+    mainWindow.setMenu(mainMenu(mainWindow, appObject, PASSVAULT_URL));
   }
 
   if (appObject.isDarkModeEnabled) {
