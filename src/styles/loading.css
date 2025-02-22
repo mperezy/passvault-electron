@@ -1,10 +1,7 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
-
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   @apply h-screen container;
 }
-
 
 .loading-animation {
   @apply w-full h-full
@@ -14,22 +11,22 @@ body {
 
 .spinner {
   @apply w-16 h-16
-    border-8 border-gdrive-black-300 border-solid
+    border-8 border-pvault-black-300 border-solid
     rounded-[50%]
     animate-spin;
 }
 .spinner-light {
-  @apply border-t-8 border-pvault-blue-100
-    border-r-8 border-r-gdrive-black-600
-    border-b-8 border-b-gdrive-black-600
-    border-l-8 border-l-gdrive-black-600;
+  @apply border-t-8 border-pvault-blue-500
+    border-r-8 border-r-pvault-blue-200
+    border-b-8 border-b-pvault-blue-200
+    border-l-8 border-l-pvault-blue-200;
 }
 
 .spinner-dark {
-  @apply border-t-8 border-t-pvault-blue-100
-  border-r-8 border-r-gdrive-black-300
-  border-b-8 border-b-gdrive-black-300
-  border-l-8 border-l-gdrive-black-300;
+  @apply border-t-8 border-t-pvault-blue-600
+  border-r-8 border-r-pvault-blue-100
+  border-b-8 border-b-pvault-blue-100
+  border-l-8 border-l-pvault-blue-100;
 }
 
 .loading-header {
