@@ -1,4 +1,4 @@
-import type { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron';
 import { Menu, app } from 'electron';
 import Status from 'ipc-events';
 import dictionary from 'main-menu/dictionary';
@@ -29,6 +29,19 @@ export default (window: BrowserWindow, appObject: AppObject, mainUrl: string) =>
         },
         {
           label: wording.app.submenu[1].title,
+          accelerator: 'CmdOrCtrl+M',
+          click: () => {
+            const allWindows = BrowserWindow.getAllWindows();
+
+            allWindows.forEach((window) => {
+              if (!window.isMinimized()) {
+                window.minimize();
+              }
+            });
+          },
+        },
+        {
+          label: wording.app.submenu[2].title,
           accelerator: 'CmdOrCtrl+Q',
           click: () => app.quit(),
         },

@@ -98,7 +98,18 @@ const createWindow = (): void => {
 
 app.whenReady().then(createWindow);
 
-app.on('browser-window-focus', () => globalShortcut.register('Cmd+QOrCtrl+Q', () => app.quit()));
+app.on('browser-window-focus', () => {
+  globalShortcut.register('Cmd+QOrCtrl+Q', () => app.quit());
+  globalShortcut.register('Cmd+MOrCtrl+M', () => {
+    const allWindows = BrowserWindow.getAllWindows();
+
+    allWindows.forEach((window) => {
+      if (!window.isMinimized()) {
+        window.minimize();
+      }
+    });
+  });
+});
 
 app.on('browser-window-blur', () => globalShortcut.unregisterAll());
 

@@ -8,6 +8,9 @@ export default {
           title: 'Refrescar',
         },
         {
+          title: 'Minimizar',
+        },
+        {
           title: 'Salir',
         },
       ],
@@ -28,6 +31,9 @@ export default {
       submenu: [
         {
           title: 'Reload',
+        },
+        {
+          title: 'Minimize',
         },
         {
           title: 'Exit',
