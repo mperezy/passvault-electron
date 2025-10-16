@@ -26,6 +26,7 @@ export const readConfig = (): Configuration => {
         darkMode: false,
         lightMode: true,
       },
+      isUrlProduction: true,
     };
   }
 };

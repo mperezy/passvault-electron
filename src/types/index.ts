@@ -36,4 +36,5 @@ export type Configuration = {
     darkMode: boolean;
     lightMode: boolean;
   };
+  isUrlProduction: boolean;
 };

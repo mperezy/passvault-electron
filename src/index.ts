@@ -1,10 +1,10 @@
 import { app, BrowserWindow, Menu, globalShortcut } from 'electron';
 import * as process from 'process';
-import env from 'env.json';
+import env from 'env';
 import type { AppObject } from 'types';
-import { readConfig } from 'utils/saveConfiguration';
+import { readConfig } from 'utils/save-configuration';
 import Status from 'ipc-events';
-import ipcMainListener from 'ipc-events/ipcMainListener';
+import ipcMainListener from 'ipc-events/ipc-main-listener';
 import windowListener from 'ipc-events/windowListener';
 import mainMenu from 'main-menu';
 
@@ -18,7 +18,8 @@ declare const NO_INTERNET_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 declare const POPUP_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-const { PASSVAULT_URL, ENV } = env;
+const { PASSVAULT_URL, ENV, IS_ADMIN, ET_PASSVAULT_URL } = env;
+const isAdmin = IS_ADMIN === 'true';
 const isProduction = ENV === 'production';
 
 const mainWindowHeight = 1033;
@@ -27,7 +28,8 @@ const mainWindowMinWidth = 633 + (isProduction ? 0 : 770);
 const mainWindowMinHeight = 1033;
 
 const configuration = readConfig();
-const { darkMode } = configuration.theme;
+const { theme, isUrlProduction } = configuration;
+const { darkMode } = theme;
 
 const appObject: AppObject = {
   isAppLoaded: false,
@@ -63,9 +65,9 @@ const createWindow = (): void => {
     .catch((error) => console.log({ errorOnLoadURL: error }));
 
   if (process.platform === 'darwin') {
-    Menu.setApplicationMenu(mainMenu(mainWindow, appObject, PASSVAULT_URL));
+    Menu.setApplicationMenu(mainMenu(mainWindow, appObject));
   } else {
-    mainWindow.setMenu(mainMenu(mainWindow, appObject, PASSVAULT_URL));
+    mainWindow.setMenu(mainMenu(mainWindow, appObject));
   }
 
   if (appObject.isDarkModeEnabled) {
@@ -79,9 +81,11 @@ const createWindow = (): void => {
     preloadEntry: POPUP_WINDOW_PRELOAD_WEBPACK_ENTRY,
   });
 
+  const mainUrl = isAdmin ? (isUrlProduction ? PASSVAULT_URL : ET_PASSVAULT_URL) : PASSVAULT_URL;
+
   // IPC Events
   ipcMainListener(mainWindow, appObject, {
-    mainUrl: PASSVAULT_URL,
+    mainUrl,
     noInternetUrl: NO_INTERNET_WINDOW_WEBPACK_ENTRY,
   });
 

@@ -1,21 +1,65 @@
+import env from 'env';
 import { BrowserWindow } from 'electron';
-import { Menu, app } from 'electron';
+import { Menu, app, ipcMain } from 'electron';
 import Status from 'ipc-events';
 import dictionary from 'main-menu/dictionary';
-import { saveConfig } from 'utils/saveConfiguration';
+import { readConfig, saveConfig } from 'utils/save-configuration';
 import type { AppObject } from 'types';
 
-const changeTheme = (window: BrowserWindow, isEnabled: boolean) => {
+const handleChangeTheme = (window: BrowserWindow, appObject: AppObject, isEnabled: boolean) => {
+  const currentConfig = readConfig();
+
   window.webContents.send(Status.TOGGLE_DARK_MODE, { isEnabled });
+  appObject.isDarkModeEnabled = isEnabled;
+  saveConfig({ ...currentConfig, theme: { darkMode: isEnabled, lightMode: !isEnabled } });
+
+  ipcMain.emit(Status.MENU_RELOAD);
 };
 
-export default (window: BrowserWindow, appObject: AppObject, mainUrl: string) => {
+const handleChangeEnvironment = async (window: BrowserWindow, url: string, isProd: boolean) => {
+  const currentConfig = readConfig();
+
+  return window
+    .loadURL(url)
+    .then(() => {
+      console.log(`**** Passvault ${isProd ? 'PROD' : 'ET'} URL was loaded as expected.`);
+      saveConfig({ ...currentConfig, isUrlProduction: isProd });
+      ipcMain.emit(Status.MENU_RELOAD);
+    })
+    .catch((error) =>
+      console.error(`**** Passvault ${isProd ? 'PROD' : 'ET'} URL was NOT loaded as expected.`, {
+        error,
+      }),
+    );
+};
+
+export default (window: BrowserWindow, appObject: AppObject) => {
+  const currentConfig = readConfig();
+  const { theme, isUrlProduction } = currentConfig;
+  const { IS_ADMIN, PASSVAULT_URL, ET_PASSVAULT_URL } = env;
+  const isAdmin = IS_ADMIN === 'true';
+
+  const mainUrl = isAdmin ? (isUrlProduction ? PASSVAULT_URL : ET_PASSVAULT_URL) : PASSVAULT_URL;
+
   const locale = app.getLocale();
   const wording = dictionary[locale];
   const template: Electron.MenuItemConstructorOptions[] = [
     {
       label: 'Passvault',
       submenu: [
+        {
+          label: 'Environment',
+          submenu: [
+            {
+              label: `Production ${isUrlProduction ? '✅' : ''}`,
+              click: () => handleChangeEnvironment(window, PASSVAULT_URL, true),
+            },
+            {
+              label: `ET ${isUrlProduction ? '' : '✅'}`,
+              click: () => handleChangeEnvironment(window, ET_PASSVAULT_URL, false),
+            },
+          ],
+        },
         {
           label: wording.app.submenu[0].title,
           accelerator: 'CmdOrCtrl+R',
@@ -55,21 +99,13 @@ export default (window: BrowserWindow, appObject: AppObject, mainUrl: string) =>
           submenu: [
             {
               id: 'theme-dark',
-              label: wording.file.submenu.options.dark,
-              click: () => {
-                changeTheme(window, true);
-                appObject.isDarkModeEnabled = true;
-                saveConfig({ theme: { darkMode: true, lightMode: false } });
-              },
+              label: `${wording.file.submenu.options.dark} ${theme.darkMode ? '✅' : ''}`,
+              click: () => handleChangeTheme(window, appObject, true),
             },
             {
               id: 'theme-light',
-              label: wording.file.submenu.options.light,
-              click: () => {
-                changeTheme(window, false);
-                appObject.isDarkModeEnabled = false;
-                saveConfig({ theme: { darkMode: false, lightMode: true } });
-              },
+              label: `${wording.file.submenu.options.light} ${theme.lightMode ? '✅' : ''}`,
+              click: () => handleChangeTheme(window, appObject, false),
             },
           ],
         },
