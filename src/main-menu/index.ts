@@ -36,8 +36,8 @@ const handleChangeEnvironment = async (window: BrowserWindow, url: string, isPro
 export default (window: BrowserWindow, appObject: AppObject) => {
   const currentConfig = readConfig();
   const { theme, isUrlProduction } = currentConfig;
-  const { IS_ADMIN, PASSVAULT_URL, ET_PASSVAULT_URL } = env;
-  const isAdmin = IS_ADMIN === 'true';
+  const { isAdmin } = appObject;
+  const { PASSVAULT_URL, ET_PASSVAULT_URL } = env;
 
   const mainUrl = isAdmin ? (isUrlProduction ? PASSVAULT_URL : ET_PASSVAULT_URL) : PASSVAULT_URL;
 
@@ -48,6 +48,7 @@ export default (window: BrowserWindow, appObject: AppObject) => {
       label: 'Passvault',
       submenu: [
         {
+          visible: isAdmin,
           label: 'Environment',
           submenu: [
             {

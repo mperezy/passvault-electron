@@ -32,6 +32,7 @@ const { theme, isUrlProduction } = configuration;
 const { darkMode } = theme;
 
 const appObject: AppObject = {
+  isAdmin,
   isAppLoaded: false,
   isNoInternetPageShown: false,
   isDarkModeEnabled: darkMode,

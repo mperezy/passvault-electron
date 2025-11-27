@@ -1,6 +1,7 @@
 import type { BrowserWindow } from 'electron';
 
 export type AppObject = {
+  isAdmin: boolean;
   isAppLoaded: boolean;
   isNoInternetPageShown: boolean;
   isDarkModeEnabled: boolean;
